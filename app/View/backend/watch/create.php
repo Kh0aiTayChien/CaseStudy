@@ -18,6 +18,10 @@
             <label for="avt" class="form-label">Image</label>
             <input type="file" class="form-control" id="avt" name="fileToUpload">
         </div>
+        <div class="mb-3">
+            <label for="avt" class="form-label">ID Brand</label>
+            <input type="text" class="form-control" id="brand_id" name="brand_id">
+        </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </div>

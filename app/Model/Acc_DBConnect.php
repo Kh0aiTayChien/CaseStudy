@@ -1,29 +1,25 @@
 <?php
 
-
-namespace App\Model;
 use PDO;
-use PDOException;
-
-class Acc_DBConnect
+class accdbconnect
 {
     private $dsn;
     private $username;
-    private $password;
+    private $pass;
 
     public function __construct()
     {
-        $this->dsn = "mysql:host=localhost;dbname=logindemo;charset=utf8";
-        $this->username = "root";
-        $this->password = "@leminhchien123";
+        $this->dsn = 'mysql:host=localhost;dbname=logindemo;charset=utf8';
+        $this->username = 'leminhchien';
+        $this->pass = 'password';
     }
 
     public function connect()
     {
         try {
-            return new PDO($this->dsn, $this->username,$this->password);
+            return new PDO($this->dsn,$this->username,$this->pass);
         }catch (PDOException $exception){
             die($exception->getMessage());
         }
-    }
+}
 }

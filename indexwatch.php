@@ -6,8 +6,15 @@ use App\Controller;
 
 $dbconnect = new \App\Model\DBConnect();
 $controller = new Controller\WatchController();
+
+if (isset($_REQUEST['find'])){
+    $controller->search();
+}
 $page = isset($_REQUEST['page']) ? $_REQUEST['page'] : null;
 include_once 'app/View/backend/layouts/header.php';
+
+
+
 try {
     switch ($page){
         case 'watch-list':

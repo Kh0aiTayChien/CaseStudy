@@ -44,7 +44,11 @@ class WatchController
         $watchs = $this->watchModel->getAll();
         include_once 'app/View/backend/watch/showlist.php';
     }
-
+    public function seeWatchdetail()
+    {
+        $watchs = $this->watchModel->getOne();
+        include_once 'app/View/backend/watch/orderdetail.php';
+    }
     public function updateWatch()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
@@ -111,5 +115,12 @@ class WatchController
                 echo "Sorry, there was an error uploading your file.";
             }
         }
+    }
+    public function search()
+    {
+        $search = $_REQUEST['search'];
+        $watchs = $this->watchModel->searchData($search);
+        include_once "../View/backend/layouts/header.php" ;
+
     }
 }

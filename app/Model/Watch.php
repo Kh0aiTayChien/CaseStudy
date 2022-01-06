@@ -11,13 +11,15 @@ class Watch
         private $brand;
         private $price;
         private $urlImage;
+        private $brand_id;
 
 
-    public function __construct($watchname, $brand, $price)
+    public function __construct($watchname, $brand, $price, $brand_id)
     {
         $this->watchname = $watchname;
         $this->brand = $brand;
         $this->price = $price;
+        $this->brand_id = $brand_id;
     }
 
 
@@ -64,7 +66,7 @@ class Watch
 
     public function setprice($price)
     {
-        $this->email = $price;
+        $this->price = $price;
     }
 
 
@@ -77,6 +79,17 @@ class Watch
     public function setUrlImage($urlImage): void
     {
         $this->urlImage = $urlImage;
+    }
+
+   public function getbrand_id()
+   {
+       return $this->brand_id;
+   }
+
+
+    public function setbrand_id($brand_id): void
+    {
+        $this->brand_id = $brand_id;
     }
 
 

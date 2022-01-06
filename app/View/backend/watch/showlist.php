@@ -12,6 +12,7 @@
                         <h5 class="card-title"><?php echo $watch->getwatchname() ?></h5>
                         <p class="card-text"><?php echo $watch->getbrand() ?></p>
                         <a href="#" class="btn btn-primary"><?php echo $watch->getprice() ." USD" ?></a>
+                        <a href="orderdetail.php" class="btn btn-outline-primary"> Buy </a>
                     </div>
                 </div>
                </td>

@@ -30,11 +30,15 @@
                 <a class="nav-link" href="indexwatch.php?page=create-watch">Add New Watch</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="signup.php">Sign Up Account</a>
+                <a class="nav-link" href="signup.php">Sign Up Manager Account</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="loginadmin.php">Sign Out</a>
             </li>
         </ul>
     </div>
+    <form class="form-inline"  method="post">
+        <input class="form-control mr-sm-2" type="text" name="search" placeholder="Search Phone Name">
+        <button  class="bg-dark" type="submit" name="find" style="color: whitesmoke ">Search</button>
+    </form>
 </nav>

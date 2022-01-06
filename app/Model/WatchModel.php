@@ -12,6 +12,20 @@ class WatchModel //CRUD with Database
         $this->dbConnect = new DBConnect();
     }
 
+    public function searchData($search)
+    {
+        try {
+            $sql  = "SELECT * FROM `watchs` WHERE `watch_name` LIKE "."'%".$search."%"."'; ";
+//            $sql="SELECT * From `products` WHERE `name` LIKE $search";
+            $stmt = $this->dbConnect->connect()->query($sql);
+            $stmt->execute();
+            return $this->convertAllToObj($stmt->fetchAll());
+        }catch (\PDOException $exception){
+            die($exception->getMessage());
+        }
+
+
+    }
     //Lấy ra toàn bộ Watch
     public function getAll()
     {
@@ -28,7 +42,7 @@ class WatchModel //CRUD with Database
     public function getOne($id)
     {
         try {
-            $sql = "SELECT `watch_name` FROM `watchs` WHERE `id` = $id";
+            $sql = "SELECT * FROM `watchs` WHERE `id` = $id";
             $stmt = $this->dbConnect->connect()->query($sql);
             $stmt->execute();
             return $this->convertAllToObj($stmt->fetchAll());
@@ -59,12 +73,13 @@ class WatchModel //CRUD with Database
 //        die();
         $url = 'uploads/'.$_FILES['fileToUpload']['name'];
         try {
-            $sql = "INSERT INTO `watchs`(`watch_name`,`brand`,`price`,`image`) VALUES (?,?,?,?)";
+            $sql = "INSERT INTO `watchs`(`watch_name`,`brand`,`price`,`image`,`brand_id`) VALUES (?,?,?,?,?)";
             $stmt = $this->dbConnect->connect()->prepare($sql);
             $stmt->bindParam(1, $request['watch_name']);
             $stmt->bindParam(2, $request['brand']);
             $stmt->bindParam(3, $request['price']);
             $stmt->bindParam(4, $url);
+            $stmt->bindParam(5, $request['brand_id']);
             $stmt->execute();
         } catch (\PDOException $exception) {
             echo $exception->getMessage();
@@ -85,12 +100,13 @@ class WatchModel //CRUD with Database
         }
 
         try {
-            $sql = "UPDATE `watchs` SET `watch_name`=?,`brand`=?,`price`=?,`image`=? WHERE `id`=" . $request['id'];
+            $sql = "UPDATE `watchs` SET `watch_name`=?,`brand`=?,`price`=?,`image`=?,`brand_id`=? WHERE `id`=" . $request['id'];
             $stmt = $this->dbConnect->connect()->prepare($sql);
             $stmt->bindParam(1, $request['watch_name']);
             $stmt->bindParam(2, $request['brand']);
             $stmt->bindParam(3, $request['price']);
             $stmt->bindParam(4, $url);
+            $stmt->bindParam(5, $request['brand_id']);
             $stmt->execute();
         } catch (\PDOException $exception) {
             echo $exception->getMessage();
@@ -107,7 +123,7 @@ class WatchModel //CRUD with Database
 
     public function convertToObject($data)
     {
-        $watch = new Watch($data['watch_name'], $data['brand'], $data['price']);
+        $watch = new Watch($data['watch_name'], $data['brand'], $data['price'], $data['brand_id']);
         $watch->setId($data['id']);
         if ($data['image'] == null) {
             $watch->setUrlImage('uploads/default/default-avatar.jpeg');

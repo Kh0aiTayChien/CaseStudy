@@ -1,7 +1,7 @@
 <?php
 session_start();
 $_SESSION['success'] = 'SIGN UP ';
-include_once 'app/Model/acc_dbconnect.php';
+include_once 'app/Model/Acc_DBConnect.php';
 $dbconnect= new accdbconnect();
 if (isset($_POST['btn-submit'])){
     $username=$_POST['username'];
